@@ -48,5 +48,7 @@ public class Administrator {
         this.mailAddress = mailAddress;
         this.password = password;
     }
+    public Administrator() {
+    }
     
 }
