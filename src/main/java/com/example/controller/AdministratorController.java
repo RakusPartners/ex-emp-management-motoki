@@ -29,7 +29,7 @@ public class AdministratorController {
      */
     @GetMapping("/toInsert")
     public String toInsert(InsertAdministratorForm form) {
-        return "/administrator/insert";
+        return "administrator/insert";
     }
 
     /**
@@ -53,6 +53,6 @@ public class AdministratorController {
      */
     @GetMapping("/")
     public String toLogin(LoginForm form){
-        return "/administrator/login.html";
+        return "administrator/login";
     }
 }
