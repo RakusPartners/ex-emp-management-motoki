@@ -23,14 +23,7 @@
   <body>
     <div class="container">
       <!-- 上余白 -->
-      <div class="row">
-        <div class="col-lg-offset-0 col-lg-6 col-md-8 col-sm-10 col-xs-12">
-          <img
-            src="../../static/img/header_logo.png"
-            th:src="@{/img/header_logo.png}"
-          />
-        </div>
-      </div>
+      <span th:insert="~{fragment-part::frag_adminheader}"></span>
       <!-- login form -->
       <div class="row">
         <div
@@ -51,7 +44,7 @@
                     <div class="col-sm-12">
                       <label for="name"> 氏名: </label>
                       <label class="error-messages">
-                        氏名を入力してください
+                        <div th:errors="*{name}" style="color: crimson;">氏名を入力してください</div>
                       </label>
                       <input
                         type="text"
@@ -70,7 +63,7 @@
                     <div class="col-sm-12">
                       <label for="mailAddress"> メールアドレス: </label>
                       <label class="error-messages">
-                        メールアドレスを入力してください
+                        <div th:errors="*{mailAddress}" style="color: crimson;">メールアドレスを入力してください</div>
                       </label>
                       <input
                         type="text"
@@ -89,7 +82,7 @@
                     <div class="col-sm-12">
                       <label for="password"> パスワード: </label>
                       <label class="error-messages">
-                        パスワードを入力してください
+                        <div th:errors="*{password}" style="color: crimson;">パスワードを入力してください</div>
                       </label>
                       <input
                         type="password"
