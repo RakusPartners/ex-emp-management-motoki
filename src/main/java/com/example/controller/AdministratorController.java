@@ -60,7 +60,12 @@ public class AdministratorController {
     public String toLogin(LoginForm form){
         return "administrator/login";
     }
-
+/**
+ * 
+ * @param form LoginForm
+ * @param model Mode
+ * @return redirect:/employee/showList
+ */
     @PostMapping("/login")
     public String login(LoginForm form,Model model){
         Administrator administrator = administratorService.login(form.getMailAddress(), form.getPassword());
@@ -70,5 +75,21 @@ public class AdministratorController {
         }
         session.setAttribute("administratorName", administrator.getName());
         return "redirect:/employee/showList";
+    }
+/**
+ * 
+ * @param form LoginForm
+ * @return redirect:/
+ */ 
+    @SuppressWarnings("finally")
+    @GetMapping("/logout")
+    public String logout(LoginForm form){
+        try {
+            session.invalidate();
+        } catch (IllegalStateException e) {
+            e.printStackTrace();
+        } finally {
+            return "redirect:/";
+        }
     }
 }
