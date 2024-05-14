@@ -17,19 +17,41 @@ import com.example.service.EmployeeService;
 public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
-
+/**
+ * 
+ * @param model
+ * @return "employee/list.html"へフォワード
+ */
     @GetMapping("/showList")
     public String showList(Model model){
         List<Employee> employeeList = employeeService.showList();
         model.addAttribute("employeeList", employeeList);
-        return "employee/list.html";
+        return "employee/list";
     }
-
+/**
+ * 
+ * @param id
+ * @param model
+ * @param form
+ * @return "employee/detail.html"へフォワード
+ */
     @GetMapping("/showDetail")
     public String showDetail(String id,Model model,UpdateEmployeeForm form){
         int intId = (int)Integer.valueOf(id);
         Employee employee = employeeService.showDetail(intId);
         model.addAttribute("employee", employee);
         return "employee/detail";
+    }
+/**
+ * 
+ * @param form
+ * @return "/employee/showList"へリダイレクト
+ */
+    @GetMapping("/update")
+    public String update(UpdateEmployeeForm form){
+        Employee employee = employeeService.showDetail(Integer.valueOf(form.getId()));
+        employee.setDependentsCount(Integer.valueOf(form.getDependentsCount()));
+        employeeService.update(employee);
+        return "redirect:/employee/showList";
     }
 } 
