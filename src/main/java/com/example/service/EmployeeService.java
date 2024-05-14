@@ -19,13 +19,17 @@ public class EmployeeService {
 
     /**
      * 従業員情報を全件取得する。
-     * @return
+     * @return 従業員情報を全件
      */
     public List<Employee> showList(){
         List<Employee> employeeList = employeeRepository.findAll();
         return employeeList;
     }
-
+/**
+ * 
+ * @param 従業員id
+ * @return 従業員情報
+ */
     public Employee showDetail(Integer id){
         Employee employee = employeeRepository.load(id);
         return employee;
