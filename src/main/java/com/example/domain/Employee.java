@@ -23,7 +23,6 @@ private String zipCode;
 private String address;
 /** 電話番号 */
 private String telephone;
-
 /** 給料*/
 private Integer salary;
 /** 特性*/

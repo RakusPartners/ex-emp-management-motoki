@@ -1,15 +1,52 @@
 package com.example.form;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 
 /**
  * @author motokiDOI
  */
 public class UpdateEmployeeForm {
-    /** 従業員ID */
+    /** ID */
     private String id;
+    /** 名前 */
+    @NotBlank(message="変更後の名前を入力してください。")
+    private String name;
+    /** 画像 */
+    private String image;
+    /** 性別 */
+    @NotBlank(message="変更後の性別を入力してください。")
+    private String gender;
+    /** 入社日 */
+    @NotBlank(message="変更後の入社日を入力してください。")
+    @Pattern(regexp = "^[0-9]{4}-[0-9]{2}-[0-9]{2}$", message = "入社日はyyyy-MM-ddの形式で入力してください。（例：1996-02-13）")
+    private String hireDate;
+    /** メールアドレス */
+    @NotBlank(message="変更後のメールアドレスを入力してください。")
+    @Email(message = "正しいメールアドレスの形式で入力してください。（例：abc@cde.com）")
+    private String mailAddress;
+    /** 郵便番号 */
+    @NotBlank(message="変更後の郵便番号を入力してください。")
+    @Pattern(regexp = "^[0-9]{3}-[0-9]{4}$", message = "郵便番号の形式で入力してください（例：123-4567）")
+    private String zipCode;
+    /** 住所 */
+    @NotBlank(message="変更後の住所を入力してください。")
+    private String address;
+    /** 電話番号 */
+    @NotBlank(message="変更後の電話番号を入力してください。")
+    @Pattern(regexp = "^[0-9]{2,4}-[0-9]{2,4}-[0-9]{2,4}$", message = "電話番号は -（ハイフン）を入れて入力してください")
+    private String telephone;
+    /** 給料 */
+    @Pattern(regexp = "^[0-9]+$", message = "半角数字を入力してください")
+    @NotBlank(message="変更後の給料を入力してください。")
+    private String salary;
+    /** 特性 */
+    @NotBlank(message="変更後の特性を入力してください。")
+    private String characteristics;
     /** 扶養人数 */
-    @Pattern(regexp ="^[0-9]+$", message="半角数字を入力してください")
+    @NotBlank(message="変更後の扶養人数を入力してください。")
+    @Pattern(regexp = "^[0-9]+$", message = "半角数字を入力してください")
     private String dependentsCount;
     public String getId() {
         return id;
@@ -17,15 +54,98 @@ public class UpdateEmployeeForm {
     public void setId(String id) {
         this.id = id;
     }
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public String getImage() {
+        return image;
+    }
+    public void setImage(String image) {
+        this.image = image;
+    }
+    public String getGender() {
+        return gender;
+    }
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+    public String getHireDate() {
+        return hireDate;
+    }
+    public void setHireDate(String hireDate) {
+        this.hireDate = hireDate;
+    }
+    public String getMailAddress() {
+        return mailAddress;
+    }
+    public void setMailAddress(String mailAddress) {
+        this.mailAddress = mailAddress;
+    }
+    public String getZipCode() {
+        return zipCode;
+    }
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
+    }
+    public String getAddress() {
+        return address;
+    }
+    public void setAddress(String address) {
+        this.address = address;
+    }
+    public String getTelephone() {
+        return telephone;
+    }
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+    public String getSalary() {
+        return salary;
+    }
+    public void setSalary(String salary) {
+        this.salary = salary;
+    }
+    public String getCharacteristics() {
+        return characteristics;
+    }
+    public void setCharacteristics(String characteristics) {
+        this.characteristics = characteristics;
+    }
     public String getDependentsCount() {
         return dependentsCount;
     }
     public void setDependentsCount(String dependentsCount) {
         this.dependentsCount = dependentsCount;
     }
+    public UpdateEmployeeForm() {
+    }
+    public UpdateEmployeeForm(String id, String name, String image, String gender, String hireDate, String mailAddress,
+            String zipCode, String address, String telephone, String salary, String characteristics,
+            @Pattern(regexp = "^[0-9]+$", message = "半角数字を入力してください") String dependentsCount) {
+        this.id = id;
+        this.name = name;
+        this.image = image;
+        this.gender = gender;
+        this.hireDate = hireDate;
+        this.mailAddress = mailAddress;
+        this.zipCode = zipCode;
+        this.address = address;
+        this.telephone = telephone;
+        this.salary = salary;
+        this.characteristics = characteristics;
+        this.dependentsCount = dependentsCount;
+    }
     @Override
     public String toString() {
-        return "UpdateEmployeeForm [id=" + id + ", dependentsCount=" + dependentsCount + "]";
+        return "UpdateEmployeeForm [id=" + id + ", name=" + name + ", image=" + image + ", gender=" + gender
+                + ", hireDate=" + hireDate + ", mailAddress=" + mailAddress + ", zipCode=" + zipCode + ", address="
+                + address + ", telephone=" + telephone + ", salary=" + salary + ", characteristics=" + characteristics
+                + ", dependentsCount=" + dependentsCount + "]";
     }
-     
+
+    
+
 }
