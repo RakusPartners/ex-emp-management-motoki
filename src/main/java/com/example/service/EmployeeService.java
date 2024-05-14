@@ -26,12 +26,19 @@ public class EmployeeService {
         return employeeList;
     }
 /**
- * 
+ * 従業員情報を表示
  * @param 従業員id
  * @return 従業員情報
  */
     public Employee showDetail(Integer id){
         Employee employee = employeeRepository.load(id);
         return employee;
+    }
+/**
+ * 従業員情報を更新
+ * @param employee 従業員情報
+ */
+    public void update(Employee employee){
+        employeeRepository.update(employee);
     }
 } 
