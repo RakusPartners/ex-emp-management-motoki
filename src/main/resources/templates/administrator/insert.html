@@ -38,6 +38,7 @@
                 <legend>
                   管理者登録<br />(システムにログインできる管理者を登録します)
                 </legend>
+                <span th:text="${errorMessage}" style="color: crimson;"></span>
                 <!-- 氏名 -->
                 <div class="form-group">
                   <div class="row">
@@ -101,7 +102,8 @@
                     <div class="col-sm-12">
                       <button type="submit" class="btn btn-primary">
                         登録
-                      </button>
+                      </button><br><br>
+                      <a th:href="@{/}">ログインはこちら</a>
                     </div>
                   </div>
                 </div>

@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 
 import com.example.domain.Employee;
+import com.example.form.FindForm;
 import com.example.repository.EmployeeRepository;
 @Service
 @Transactional
@@ -23,6 +24,14 @@ public class EmployeeService {
      */
     public List<Employee> showList(){
         List<Employee> employeeList = employeeRepository.findAll();
+        return employeeList;
+    }
+    /**
+     * 検索条件に合う従業員情報を取得する。
+     * @return 従業員情報を全件
+     */
+    public List<Employee> showFindByForm(FindForm form){
+        List<Employee> employeeList = employeeRepository.findByForm(form);
         return employeeList;
     }
 /**

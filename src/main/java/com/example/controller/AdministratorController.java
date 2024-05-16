@@ -35,7 +35,7 @@ public class AdministratorController {
      * @return "/administrator/insert"
      */
     @GetMapping("/toInsert")
-    public String toInsert(InsertAdministratorForm form) {
+    public String toInsert(InsertAdministratorForm form ,Model model) {
         return "administrator/insert";
     }
 
@@ -46,11 +46,14 @@ public class AdministratorController {
      * @return
      */
     @PostMapping("/insert")
-    public String insert(@Validated InsertAdministratorForm form,BindingResult result) {
+    public String insert(@Validated InsertAdministratorForm form,BindingResult result,Model model) {
         if(result.hasErrors()){
-            return toInsert(form);
+            return toInsert(form,model);
         }
-        
+        if(administratorService.findByMailAddress(form.getMailAddress()) != null){
+            model.addAttribute("errorMessage", "このメールアドレスは登録されています。");
+            return toInsert(form,model);
+        }
         Administrator administrator = new Administrator();
         BeanUtils.copyProperties(form, administrator);
         administratorService.insert(administrator);
@@ -87,15 +90,10 @@ public class AdministratorController {
  * @param form LoginForm
  * @return redirect:/
  */ 
-    @SuppressWarnings("finally")
     @GetMapping("/logout")
     public String logout(LoginForm form){
-        try {
+            session.removeAttribute("administratorName");
             session.invalidate();
-        } catch (IllegalStateException e) {
-            e.printStackTrace();
-        } finally {
             return "redirect:/";
-        }
     }
 }

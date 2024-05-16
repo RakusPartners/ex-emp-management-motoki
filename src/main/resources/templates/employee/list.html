@@ -67,8 +67,32 @@
              
             </tbody>
           </table>
-
+          <br>
           <!-- ここから下を編集する必要はありません -->
+          <form th:action="@{/employee/showFindByForm}" th:object="${findForm}" method="get">
+            <table class="table table-striped">
+              <tr>
+                <td colspan="2">
+                  <p>従業員検索フォーム</p>
+                </td>
+              </tr>
+              <tr>
+                <td>名前</td>
+                <td><input type="text" name="name"></td>
+              </tr>
+              <tr>
+                <td>入社日</td>
+                <td><input type="text" name="startDate">以降<input type="text" name="endDate">以前</td>
+              </tr>
+              <tr>
+                <td>扶養人数</td>
+                <td><input type="text" name="dependentsCounts"></td>
+              </tr>
+              <tr>
+                <td colspan="2"><button>検索</button></td>
+              </tr>
+            </table>
+          </form>
         </div>
       </div>
     </div>

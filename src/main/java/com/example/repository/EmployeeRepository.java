@@ -11,6 +11,8 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 
 import com.example.domain.Employee;
+import com.example.form.FindForm;
+import com.example.util.formatDateAndString;
 
 /**
  * 
@@ -19,7 +21,7 @@ import com.example.domain.Employee;
  * @author motokidoi
  */
 @Repository
-public class EmployeeRepository {
+public class EmployeeRepository{
     private static final RowMapper<Employee> EMPLOYEE_ROW_MAPPER = (rs, i) -> {
         Employee employee = new Employee();
         employee.setId(rs.getInt("id"));
@@ -73,5 +75,12 @@ public class EmployeeRepository {
         SqlParameterSource param = new BeanPropertySqlParameterSource(employee);
         String updateSql = "UPDATE employees SET name=:name, image=:image, gender=:gender, hire_date=:hireDate, mail_address=:mailAddress, zip_code=:zipCode, address=:address, telephone=:telephone, salary=:salary, characteristics=:characteristics, dependents_count=:dependentsCount WHERE id=:id";
         template.update(updateSql, param);
+    }
+
+    public List<Employee> findByForm (FindForm form){
+        String sql = "SELECT id, name, image, gender, hire_date, mail_address, zip_code, address, telephone, salary, characteristics, dependents_count FROM employees WHERE name LIKE '%'||:name||'%' AND hire_date >= :startDate AND hire_date <= :endDate AND dependents_count >= :dependentsCounts ORDER BY hire_date DESC";
+        SqlParameterSource param = new MapSqlParameterSource().addValue("name", form.getName()).addValue("startDate", formatDateAndString.stringToDate(form.getStartDate())).addValue("endDate", formatDateAndString.stringToDate(form.getEndDate())).addValue("dependentsCounts", Integer.valueOf(form.getDependentsCounts()));
+        List<Employee> employeeList = template.query(sql, param, EMPLOYEE_ROW_MAPPER);
+        return employeeList;
     }
 }
